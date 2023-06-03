@@ -1,0 +1,29 @@
+spring:
+  cloud:
+    function:
+      definition: producer;consumer
+    stream:
+      kafka:
+        binder:
+          brokers: broker:29092
+        bindings:
+          producer-out-0:
+            destination: producer
+            producer:
+              configuration:
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                value.serializer: org.apache.kafka.common.serialization.StringSerializer
+          consumer-in-0:
+            destination: consumer
+            group: consumer
+            consumer:
+              configuration:
+                key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+                value.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      bindings:
+        producer-out-0:
+          destination: Topic1
+          contentType: application/json
+        consumer-in-0:
+          destination: Topic1
+          contentType: application/json
