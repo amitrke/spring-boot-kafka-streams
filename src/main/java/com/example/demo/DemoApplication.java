@@ -1,8 +1,6 @@
 package com.example.demo;
 
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-
+import org.apache.kafka.streams.kstream.KStream;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -15,15 +13,12 @@ public class DemoApplication {
 	}
 
 	@Bean
-	public Consumer<String> consumer() {
-		return message -> {
-			System.out.println("Received message: " + message);
-		};
-	}
+   public java.util.function.Consumer<KStream<String, String>> process() {
 
-	@Bean
-	public Supplier<String> supplier() {
-		return () -> new String("Hello world!");
-	}
-	
+       return input ->
+               input.foreach((key, value) -> {
+                   System.out.println("Key: " + key + " Value: " + value);
+               });
+   }
+
 }

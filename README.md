@@ -5,6 +5,11 @@
 gradle build
 ```
 
+## Run
+```
+gradle bootRun
+```
+
 ## Kafka
 ### Control Center
 
